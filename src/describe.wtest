@@ -48,7 +48,7 @@ describe "Punto 2 - Lucha" {
 	
 	method nuevoArtefacto(unidadesDeLucha) =
 		object {
-			method unidadesDeLucha() = unidadesDeLucha
+			method unidadesDeLucha(personaje) = unidadesDeLucha
 		}
 	
 	test "Valor de lucha de Rolando sin artefactos" {
@@ -74,7 +74,7 @@ describe "Punto 2 - Lucha" {
 	
 	test "Unidades de lucha de la máscara oscura tras eclipse" {
 		fuerzaOscura.provocarEclipse()
-		assert.equals(5, mascaraOscura.unidadesDeLucha())
+		assert.equals(5, mascaraOscura.unidadesDeLucha(rolando))
 	}
 	
 	test "Valor de lucha de Rolando sin máscara oscura" {
