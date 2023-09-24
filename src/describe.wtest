@@ -1,9 +1,13 @@
 import modelo.*
 
+const espectroMalefico = new HechizoLogos(nombre="espectro malefico", multiplicador=1)
+const rolando = new Personaje(hechizoPreferido = espectroMalefico)
+const mascaraOscura = new Mascara(indiceDeOscuridad=1)
+
 describe "Punto 1 - Hechicería" {
 	
-	method initialize() {
-		rolando.hechizoPreferido(espectroMalefico)
+	method initialize() {		
+		//rolando.hechizoPreferido(espectroMalefico)
 	}
 
 	test "Nivel de hechicería de Rolando con espectro maléfico" {
@@ -11,7 +15,8 @@ describe "Punto 1 - Hechicería" {
 	}
 	
 	test "Nivel de hechicería de Rolando con espectro muy maléfico" {
-		espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
+		const nuevoEspectroMalefico = new HechizoLogos(nombre="espectro superrecontramalefico muajajaja", multiplicador=1)
+		rolando.hechizoPreferido(nuevoEspectroMalefico)
 		assert.equals(125, rolando.nivelDeHechiceria())
 	}
 	
@@ -30,8 +35,8 @@ describe "Punto 1 - Hechicería" {
 	}
 	
 	test "Espectro maléfico de nombre pepe no es poderoso" {
-		espectroMalefico.nombre("pepe")
-		assert.notThat(espectroMalefico.esPoderoso())
+		const hechizoPepe = new HechizoLogos(nombre="pepe", multiplicador=1)
+		assert.notThat(hechizoPepe.esPoderoso())
 	}
 	
 	test "Hechizo básico no es poderoso" {
@@ -41,18 +46,18 @@ describe "Punto 1 - Hechicería" {
 
 describe "Punto 2 - Lucha" {
 	method initialize() {
-		rolando.agregarArtefacto(espadaDelDestino)
+		rolando.agregarArtefacto(arma)
 		rolando.agregarArtefacto(collarDivino)
 		rolando.agregarArtefacto(mascaraOscura)
 	}
 	
 	method nuevoArtefacto(unidadesDeLucha) =
 		object {
-			method unidadesDeLucha(personaje) = unidadesDeLucha
+			method unidadesDeLucha(luchador) = unidadesDeLucha
 		}
 	
 	test "Valor de lucha de Rolando sin artefactos" {
-		rolando.removerArtefacto(espadaDelDestino)
+		rolando.removerArtefacto(arma)
 		rolando.removerArtefacto(collarDivino)
 		rolando.removerArtefacto(mascaraOscura)
 		assert.equals(1, rolando.valorDeLucha())
