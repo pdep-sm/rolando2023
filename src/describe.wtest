@@ -1,4 +1,6 @@
-import modelo.*
+import personaje.*
+import artefactos.*
+import hechizos.*
 
 const espectroMalefico = new HechizoLogos(nombre="espectro malefico", multiplicador=1)
 const rolando = new Personaje(hechizoPreferido = espectroMalefico)
