@@ -6,13 +6,19 @@ class Hechizo {
 	method unidadesDeLucha(luchador) = self.poder() 
 	
 	method precio(armadura) = armadura.unidadesBase() + self.precio()
+	
+	method pesoRefuerzo() = 
+		if (self.poder().even())
+			2
+		else
+			1
 }
 
 
 class HechizoLogos inherits Hechizo {
 
 	const nombre
-	const multiplicador
+	var property multiplicador
 
 	override method poder() = nombre.length() * multiplicador
 	
@@ -35,13 +41,25 @@ object hechizoBasico inherits Hechizo {
 class LibroHechizos inherits Hechizo {
 	const hechizos
 
-	override method poder() = self.hechizosPoderosos().sum{ hechizo => hechizo.poder() }
+	override method poder() = self.hechizosPoderosos().sum { hechizo => hechizo.poder() }
 	
 	method hechizosPoderosos() = hechizos.filter{ hechizo => hechizo.esPoderoso() }
 
 	override method esPoderoso() = self.hechizosPoderosos().isNotEmpty()
 	
-	override method precio() = 0 //TODO Franco :) xD  
-	
+	override method precio() = hechizos.size() * 10 + self.poder()
 }
+
+object hechizoComercial 
+	inherits HechizoLogos(nombre = "el hechizo comercial", multiplicador = 2) {
+	 var porcentajePoder = 0.2
+	 
+	 override method poder() = super() * porcentajePoder  
+}
+
+
+
+
+
+
 
